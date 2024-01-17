@@ -1,0 +1,103 @@
+#!/bin/bash
+
+## Assing Vars
+workspaceFolder=$1
+# program=$2
+
+echo -e "\e[1m--------- ----------------------------------- ---------"
+echo -e "--------- Clean | Generate | Terminal | Cmake ---------"
+echo -e "--------- ----------------------------------- ---------";
+echo -e "\e[100m \e[1m"
+echo -e "WorkSpace Directory: \e[0m"
+# echo $1	## Bash/File/Program input
+echo $workspaceFolder	## Bash/File/Program input
+echo -e "\e[100m \e[1m \e[0m"
+echo 
+
+cd $workspaceFolder
+
+##
+### Compile
+echo -e "\e[1m\e[100m####### ####### ####### ####### ####### ####### #######" ; 
+echo "####### ####### ####### Generate ####### ####### #######" ; 
+echo "####### ####### ####### ####### ####### ####### #######" ; 
+echo -e "\e[0m"
+echo ;
+
+
+### If the build folder does not exist, mkdir
+if [ ! -d "build" ]
+then
+		mkdir -p -v "build"
+else
+		rm -rf ./build ;
+		echo "build folder cleared!"
+		mkdir -p -v "build"
+fi
+
+echo
+echo
+##
+### Compile
+echo -e "\e[1m\e[100m####### ####### ####### ####### ####### ####### #######" ; 
+echo "####### ####### ####### Generate ####### ####### #######" ; 
+echo "####### ####### ####### ####### ####### ####### #######" ; 
+echo -e "\e[0m"
+echo ;
+
+echo
+cd build;
+pwd
+echo
+echo
+
+# ls -al ;
+
+### Unix 
+# cmake -G "Unix Makefiles" -DCMAKE_CXX_FLAGS="-fdiagnostics-color=always" -DCMAKE_C_FLAGS="-fdiagnostics-color=always" ..
+# echo
+# echo "+++++ Generated using Unix Makefiles +++++"
+
+
+### Ninja 
+time cmake -G "Ninja" -DCMAKE_CXX_FLAGS="-fdiagnostics-color=always" -DCMAKE_C_FLAGS="-fdiagnostics-color=always" ..
+
+echo
+echo "+++++ Generated using Ninja +++++"
+
+##
+###
+echo ; 
+echo ; 
+echo -e "\e[1m***** ***** ******** ****** ***** ***** *****" ; 
+echo "***** ***** ***** Generated ***** ***** *****" ; 
+echo "***** ***** ***** ********* ***** ***** *****" ; 
+echo -e "\e[0m"
+read  -n 1; 
+exit; 
+exec bash;
+
+
+
+# echo "Create C++ Cmake Project!"
+# echo "Enter root name:"
+
+# read Root_Name	## User Input
+
+# echo "Enter project name:"
+# read project_name
+
+# LibsDir="${Root_Name}/${project_name}/Core/src/"
+# MainDir="${Root_Name}/${project_name}/main/"
+# TestDir="${Root_Name}/${project_name}/test/"
+# Assets="${Root_Name}/Assets"
+
+# if [ ! -d $Root_Name ]
+# then
+#      mkdir -p -v $LibsDir
+#      mkdir -p -v $MainDir
+#      mkdir -p -v $TestDir
+#      mkdir -p -v $Assets
+# else
+#      echo "Project exists"
+# fi

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+echo -e "\e[1m--------- ---------------------- ---------"
+echo -e "--------- Cleaning Workspaces ---------"
+echo -e "--------- ---------------------- ---------";
+
+echo
+echo -e "Before:"
+du -shc ~/.config/Code/User/workspaceStorage/
+ls -Xhalsv ~/.config/Code/User/workspaceStorage/
+
+echo
+echo
+
+rm -rf ~/.config/Code/User/workspaceStorage/*
+
+echo -e "After:"
+du -shc ~/.config/Code/User/workspaceStorage/
+ls -Xhalsv ~/.config/Code/User/workspaceStorage/
+
+
+##
+###
+echo ; 
+echo ; 
+echo -e "\e[1m***** ***** ***** ****** ***** ***** *****" ; 
+echo "***** ***** ***** Finish ***** ***** *****" ; 
+echo "***** ***** ***** ****** ***** ***** *****" ; 
+echo -e "\e[0m"
+read  -n 1; 
+exit; 
+exec bash;

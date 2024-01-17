@@ -1,0 +1,104 @@
+#!/bin/bash
+
+## Assing Vars
+fileDirname=$1
+# program=$2
+
+echo -e "\e[1m--------- ---------- ---------"
+echo -e "--------- New Class ---------"
+echo -e "--------- ---------- ---------";
+echo -e "\e[100m \e[1m"
+echo -e "File Directory: \e[0m"
+echo $fileDirname	## Bash/File/Program input
+echo -e "\e[100m \e[1m \e[0m"
+echo 
+
+cd $fileDirname
+
+echo "+++Input the class name+++"
+read class_name
+class_include=$class_name".h"
+class_HEADER=$class_name"_H"
+class_HEADER=${class_HEADER^^}
+
+### If the build folder does not exist, mkdir
+if [ ! -f "$class_name.h" ]
+then
+		# touch $class_name.h
+
+		cat > $class_name.h << EOF
+#ifndef $class_HEADER
+#define $class_HEADER
+
+class $class_name {
+	public:
+	private:
+};
+
+#endif // $class_HEADER
+EOF
+
+else
+		echo "Header Exist!!!"
+fi
+
+echo
+echo "+++Would you like a Source file(.cpp)+++"
+read in_source
+
+if [[ $in_source == 'y' || $in_source == 'Y' || $in_source == 'S' || $in_source == 's' ]]
+then
+		if [ ! -f "$class_name.cpp" ]
+		then
+				# touch $class_name.cpp
+				cat > $class_name.cpp << EOF
+#include "./$class_include"
+// $class_HEADER
+EOF
+
+		else
+				echo "Source Exist!!!"
+		fi
+else
+		echo "Header Only!!!"
+fi
+
+echo 
+echo "Done!!!"
+
+##
+###
+# echo ; 
+# echo ; 
+# echo -e "\e[1m***** ***** ******** ****** ***** ***** *****" ; 
+# echo "***** ***** ***** Finished ***** ***** *****" ; 
+# echo "***** ***** ***** ********* ***** ***** *****" ; 
+# echo -e "\e[0m"
+# read  -n 1; 
+# exit; 
+# exec bash;
+
+
+
+# echo "Create C++ Cmake Project!"
+# echo "Enter root name:"
+
+# read Root_Name	## User Input
+
+# echo "Enter project name:"
+# read project_name
+
+# LibsDir="${Root_Name}/${project_name}/Core/src/"
+# MainDir="${Root_Name}/${project_name}/main/"
+# TestDir="${Root_Name}/${project_name}/test/"
+# Assets="${Root_Name}/Assets"
+
+# if [ ! -d $Root_Name ]
+# then
+#      mkdir -p -v $LibsDir
+#      mkdir -p -v $MainDir
+#      mkdir -p -v $TestDir
+#      mkdir -p -v $Assets
+# else
+#      echo "Project exists"
+# fi

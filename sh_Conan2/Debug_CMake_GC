@@ -1,0 +1,139 @@
+#!/bin/bash
+
+## Assing Vars
+workspaceFolder=$1
+# program=$2
+
+echo -e "\e[1m--------- --------------------------- ---------"
+echo -e "--------- Generate | -Debug- | Cmake ---------"
+echo -e "--------- --------------------------- ---------";
+echo -e "\e[100m \e[1m"
+echo -e "WorkSpace Directory: \e[0m"
+# echo $1	## Bash/File/Program input
+echo $workspaceFolder	## Bash/File/Program input
+echo -e "\e[100m \e[1m \e[0m"
+echo 
+
+##
+### Compile
+echo -e "\e[1m\e[100m####### ####### ####### ####### ####### ####### #######" ; 
+echo "####### ####### ####### Generate ####### ####### #######" ; 
+echo "####### ####### ####### ####### ####### ####### #######" ; 
+echo -e "\e[0m"
+echo ;
+
+cd $workspaceFolder
+
+
+# if [ ! -d "build" ] ### Folder does NOT exist, mkdir
+# if [ -d "build" ]; ### Folder does EXIST, mkdir
+# then
+# # 	echo "Building with Conan v2! // Debug"
+# # 	conan install . --output-folder=build/Debug --build=missing --settings=build_type=Debug
+# # else
+# 	# mkdir -p -v "build"
+# 	# conan install . --output-folder=build/Debug --build=missing ## Release
+# 	echo "build dir already exist!"
+# 	echo "Do you want to rebuild?"
+	
+# 	read answer
+
+# 	if [[ ("$answer" = "y") || ("$answer" = "Y") ]];
+# 	then
+# 		echo "Deleting build dir"
+# 		rm -rf build
+# 	else
+# 		echo "Exit!!!"
+# 		exit 
+# 	fi 
+# fi
+
+rm -rf build Log compile_commands.json CMakeUserPresets.json
+
+# sleep 5;
+
+echo "Building with Conan v2! // Debug"
+## old
+# conan install . --output-folder=build/Debug --build=missing --settings=build_type=Debug
+
+conan install . --build=missing --settings=build_type=Debug 
+
+if [ ! -d "build" ] ### Folder does NOT exist, mkdir
+then
+	echo "Error!!!"
+	echo "Building with conan has an error!!!"
+	
+	exit 
+fi
+
+echo
+cd build/Debug;
+pwd
+echo
+echo
+
+
+# ls -al ;
+
+### Unix 
+# cmake -G "Unix Makefiles" -DCMAKE_CXX_FLAGS="-fdiagnostics-color=always" -DCMAKE_C_FLAGS="-fdiagnostics-color=always" ..
+# echo
+# echo "+++++ Generated using Unix Makefiles +++++"
+
+
+### Ninja Conan OLD
+# cmake -G "Ninja" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug ../..
+
+### Ninja Conan
+cmake -G "Ninja" -DCMAKE_TOOLCHAIN_FILE=generators/conan_toolchain.cmake -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_BUILD_TYPE=Debug ../.. 
+
+### Ninja
+# cmake -G "Ninja" -DCMAKE_CXX_FLAGS="-fdiagnostics-color=always" -DCMAKE_C_FLAGS="-fdiagnostics-color=always" ..
+# cmake -G "Ninja" -DCMAKE_CXX_FLAGS="-fdiagnostics-color=always" -DCMAKE_C_FLAGS="-fdiagnostics-color=always" -DCMAKE_EXPORT_COMPILE_COMMANDS=1..
+
+echo
+echo "+++++ Generated using Ninja / Debug +++++"
+
+echo ; 
+echo ; 
+echo "+++++ +++++ Compiling +++++ +++++"
+
+cmake --build . --config Debug -j`nproc`
+cd ../..
+
+##
+###
+echo ; 
+echo ; 
+echo -e "\e[1m***** ***** ******** ****** ***** ***** *****" ; 
+echo "***** ***** ***** Generated ***** ***** *****" ; 
+echo "***** ***** ***** ********* ***** ***** *****" ; 
+echo -e "\e[0m"
+read  -n 1; 
+exit; 
+exec bash;
+
+
+
+# echo "Create C++ Cmake Project!"
+# echo "Enter root name:"
+
+# read Root_Name	## User Input
+
+# echo "Enter project name:"
+# read project_name
+
+# LibsDir="${Root_Name}/${project_name}/Core/src/"
+# MainDir="${Root_Name}/${project_name}/main/"
+# TestDir="${Root_Name}/${project_name}/test/"
+# Assets="${Root_Name}/Assets"
+
+# if [ ! -d $Root_Name ]
+# then
+#      mkdir -p -v $LibsDir
+#      mkdir -p -v $MainDir
+#      mkdir -p -v $TestDir
+#      mkdir -p -v $Assets
+# else
+#      echo "Project exists"
+# fi

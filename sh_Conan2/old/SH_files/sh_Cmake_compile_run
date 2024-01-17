@@ -1,0 +1,93 @@
+#!/bin/bash
+
+## Assing Vars
+program=$programName
+
+echo -e "\e[1m--------- ------------------------------ ---------"
+echo -e "--------- Build | Run | Terminal | Cmake ---------"
+echo -e "--------- ------------------------------ ---------";
+echo -e "\e[100m \e[1m"
+echo -e "WorkSpace Directory: \e[0m"
+# echo $1	## Bash/File/Program input
+pwd	## Bash/File/Program input
+echo -e "\e[100m \e[1m"
+echo -e "Program Directory: \e[0m"
+# echo $2	## Bash/File/Program input
+echo $program;	## Bash/File/Program input
+
+####
+## Run the Program
+### Go to the path file
+# konsole -e /bin/bash -c \" cd $1 ;
+# konsole -e /bin/bash -c \" cd workspaceFolder ;
+echo 
+
+##
+### Compile
+echo -e "\e[1m\e[100m####### ####### ####### ####### ####### ####### #######" ; 
+echo "####### ####### ####### Compile ####### ####### #######" ; 
+echo "####### ####### ####### ####### ####### ####### #######" ; 
+echo -e "\e[0m"
+echo ;
+
+
+# cmake --build ./build --config Debug --target all -- -j `nproc` ;
+
+time konsole --workdir . -e /bin/bash -c "./SH_files/sh_Cmake_Compile .";
+
+# konsole --workdir . -e /bin/bash -c "cmake --build build --config Debug --target all -- -j `nproc`; read -n 1; exit;  exec bash;"
+
+# cmake --build $workspaceFolder/build --config Debug --target all -- -j 2 
+
+##
+### Run
+echo -e "\e[1m\e[100m|||||| |||||| |||||| ||||||| |||||| |||||| ||||||" ; 
+echo "|||||| |||||| |||||| Running |||||| |||||| ||||||" ; 
+echo "|||||| |||||| |||||| ||||||| |||||| |||||| ||||||" ; 
+echo -e "\e[0m"
+echo ;
+# $2; 
+$program 
+echo ;
+echo -e "\e[1m\e[100m|||||| |||||| |||||| ||||||| |||||| |||||| ||||||" ; 
+echo "|||||| |||||| |||||| ||||||| |||||| |||||| ||||||" ; 
+echo -e "\e[0m"
+echo ;
+echo ;
+
+##
+###
+echo ; 
+echo ; 
+echo -e "\e[1m***** ***** ***** ****** ***** ***** *****" ; 
+echo "***** ***** ***** Finish ***** ***** *****" ; 
+echo "***** ***** ***** ****** ***** ***** *****" ; 
+echo -e "\e[0m"
+read  -n 1; 
+exit; 
+exec bash;
+
+
+
+# echo "Create C++ Cmake Project!"
+# echo "Enter root name:"
+
+# read Root_Name	## User Input
+
+# echo "Enter project name:"
+# read project_name
+
+# LibsDir="${Root_Name}/${project_name}/Core/src/"
+# MainDir="${Root_Name}/${project_name}/main/"
+# TestDir="${Root_Name}/${project_name}/test/"
+# Assets="${Root_Name}/Assets"
+
+# if [ ! -d $Root_Name ]
+# then
+#      mkdir -p -v $LibsDir
+#      mkdir -p -v $MainDir
+#      mkdir -p -v $TestDir
+#      mkdir -p -v $Assets
+# else
+#      echo "Project exists"
+# fi

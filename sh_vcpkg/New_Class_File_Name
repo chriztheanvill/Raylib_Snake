@@ -1,0 +1,72 @@
+#!/bin/bash
+
+## Assing Vars
+fileDirname=$1
+filename=$2
+# program=$2
+
+echo -e "\e[1m--------- ---------- ---------"
+echo -e "--------- New Class ---------"
+echo -e "--------- ---------- ---------";
+echo -e "\e[100m \e[1m"
+echo -e "File Directory: \e[0m"
+echo $fileDirname	## Bash/File/Program input
+echo -e "\e[100m \e[1m \e[0m"
+echo 
+
+cd $fileDirname
+
+class_include=$filename".h"
+class_HEADER=$filename"_H"
+class_HEADER=${class_HEADER^^}
+
+if [ ! -f "$filename.cpp" ]
+	then
+	cat > $filename.cpp << EOF
+#include "./$class_include"
+// $class_HEADER
+EOF
+
+else
+		echo "Source Exist!!!"
+fi
+
+echo 
+echo "Done!!!"
+
+##
+###
+# echo ; 
+# echo ; 
+# echo -e "\e[1m***** ***** ******** ****** ***** ***** *****" ; 
+# echo "***** ***** ***** Finished ***** ***** *****" ; 
+# echo "***** ***** ***** ********* ***** ***** *****" ; 
+# echo -e "\e[0m"
+# read  -n 1; 
+# exit; 
+# exec bash;
+
+
+
+# echo "Create C++ Cmake Project!"
+# echo "Enter root name:"
+
+# read Root_Name	## User Input
+
+# echo "Enter project name:"
+# read project_name
+
+# LibsDir="${Root_Name}/${project_name}/Core/src/"
+# MainDir="${Root_Name}/${project_name}/main/"
+# TestDir="${Root_Name}/${project_name}/test/"
+# Assets="${Root_Name}/Assets"
+
+# if [ ! -d $Root_Name ]
+# then
+#      mkdir -p -v $LibsDir
+#      mkdir -p -v $MainDir
+#      mkdir -p -v $TestDir
+#      mkdir -p -v $Assets
+# else
+#      echo "Project exists"
+# fi

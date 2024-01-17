@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo -e "\e[1m\e[100m####### ####### ####### ######### ####### ####### #######" ; 
+echo "####### ####### ####### Compiling ####### ####### #######" ; 
+echo "####### ####### ####### ######### ####### ####### #######" ; 
+echo -e "\e[0m"
+
+# cmake --build build/release --config Release --target all -- -j 2 ;
+cmake --build build/release --config Release --target all -- -j `nproc` ;
+
+echo
+echo
+echo -e "\e[1m\e[100m####### ####### ####### ######### ####### ####### #######" ; 
+echo "####### ####### ####### Completed ####### ####### #######" ; 
+echo "####### ####### ####### ######### ####### ####### #######" ; 
+echo -e "\e[0m"
+
+
+read  -n 1; 
+exit; 
+exec bash;

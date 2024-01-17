@@ -1,0 +1,112 @@
+#!/bin/bash
+
+## Assing Vars
+workspaceFolder=$1
+program=$2
+
+echo -e "\e[1m--------- ------------------------------ ---------"
+echo -e "--------- Build | Run | Terminal | Cmake | Debug ---------"
+echo -e "--------- ------------------------------ ---------";
+echo -e "\e[100m \e[1m"
+echo -e "WorkSpace Directory: \e[0m"
+# echo $1	## Bash/File/Program input
+echo $workspaceFolder	## Bash/File/Program input
+echo -e "\e[100m \e[1m"
+echo -e "Program Directory: \e[0m"
+# echo $2	## Bash/File/Program input
+echo $program;	## Bash/File/Program input
+
+####
+## Run the Program
+### Go to the path file
+# konsole -e /bin/bash -c \" cd $1 ;
+# konsole -e /bin/bash -c \" cd workspaceFolder ;
+echo 
+
+##
+### Compile
+echo -e "\e[1m\e[100m####### ####### ####### ####### ####### ####### #######" ; 
+echo "####### ####### ####### Compile Debug ####### ####### #######" ; 
+echo "####### ####### ####### ####### ####### ####### #######" ; 
+echo -e "\e[0m"
+echo ;
+# konsole -e /bin/bash -c "cmake --build $workspaceFolder/build --config Debug --target all -- -j 2 ; 
+# 	echo $?;
+# 	read  -n 1; 
+# 	exit; 
+# 	exec bash;";
+
+# time konsole -e  /bin/bash -c "$workspaceFolder/SH_files_VS/Cmake_Compile_D $workspaceFolder ";
+
+# gnome-terminal -- $workspaceFolder/SH_files_VS/Cmake_Compile_D $workspaceFolder
+
+# terminator -e " /bin/bash -c \"$workspaceFolder/SH_files_VS/Cmake_Compile_D $workspaceFolder \" " &
+
+
+# program_rr=$(konsole -e /bin/bash -c "$workspaceFolder/SH_files/Cmake_Compile $workspaceFolder");
+
+
+cd $workspaceFolder
+cd build/Debug
+pwd
+
+## Conan
+cmake --build . --config Debug
+
+## Normal
+# cmake --build $workspaceFolder/build/Debug --config Debug --target all -- -j 1 ;
+# cmake --build $workspaceFolder/build/Debug --config Debug --target all -- -j `nproc` ;
+
+
+##
+### Run
+echo -e "\e[1m\e[100m|||||| |||||| |||||| ||||||| |||||| |||||| ||||||" ; 
+echo "|||||| |||||| |||||| Running |||||| |||||| ||||||" ; 
+echo "|||||| |||||| |||||| ||||||| |||||| |||||| ||||||" ; 
+echo -e "\e[0m"
+echo ;
+# cd Source/Main
+cd ../..
+pwd
+# $2; 
+./$program 
+echo ;
+echo -e "\e[1m\e[100m|||||| |||||| |||||| ||||||| |||||| |||||| ||||||" ; 
+echo "|||||| |||||| |||||| ||||||| |||||| |||||| ||||||" ; 
+echo -e "\e[0m"
+echo ;
+##
+###
+echo ; 
+echo -e "\e[1m***** ***** ***** ****** ***** ***** *****" ; 
+echo "***** ***** ***** Finish ***** ***** *****" ; 
+echo "***** ***** ***** ****** ***** ***** *****" ; 
+echo -e "\e[0m"
+read  -n 1; 
+exit; 
+exec bash;
+
+
+
+# echo "Create C++ Cmake Project!"
+# echo "Enter root name:"
+
+# read Root_Name	## User Input
+
+# echo "Enter project name:"
+# read project_name
+
+# LibsDir="${Root_Name}/${project_name}/Core/src/"
+# MainDir="${Root_Name}/${project_name}/main/"
+# TestDir="${Root_Name}/${project_name}/test/"
+# Assets="${Root_Name}/Assets"
+
+# if [ ! -d $Root_Name ]
+# then
+#      mkdir -p -v $LibsDir
+#      mkdir -p -v $MainDir
+#      mkdir -p -v $TestDir
+#      mkdir -p -v $Assets
+# else
+#      echo "Project exists"
+# fi

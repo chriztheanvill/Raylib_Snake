@@ -1,0 +1,49 @@
+#!/bin/bash
+
+## Assing Vars
+workspaceFolder=$1
+
+echo -e "\e[1m\e[100m####### ####### ####### ######### ####### ####### #######" ; 
+echo "####### ####### ####### Compiling ####### ####### #######" ; 
+echo "####### ####### ####### ######### ####### ####### #######" ; 
+echo -e "\e[0m"
+
+## Compile Program
+
+### Gives all command
+# program_r=$(cmake --build $workspaceFolder/build --config Debug --target all -- -j 2) ;
+
+### Gives a part of the command
+#  program_r=( $(cmake --build $workspaceFolder/build --config Debug --target all -- -j 2)) ;
+
+### Does not return the string 
+# cmake --build $workspaceFolder/build --config Debug --target all -- -j 2 ;
+
+time cmake --build $workspaceFolder/build --config Debug --target all -- -j `nproc` ;
+
+# echo $?;
+# if [[ $program_r != 'ninja: no work to do.' ]]; then
+# 	echo $program_r;
+# 	echo
+# 	echo
+# 	echo -e "\e[1m\e[100m####### ####### ####### ######### ####### ####### #######" ; 
+# 	echo "####### ####### ####### Completed ####### ####### #######" ; 
+# 	echo "####### ####### ####### ######### ####### ####### #######" ; 
+# 	echo -e "\e[0m"
+# else
+# 	echo "####### ####### ####### Nothing ####### ####### #######" ; 
+# 	exit; 
+# 	exec bash;
+# fi
+
+echo
+echo
+echo -e "\e[1m\e[100m####### ####### ####### ######### ####### ####### #######" ; 
+echo "####### ####### ####### Completed ####### ####### #######" ; 
+echo "####### ####### ####### ######### ####### ####### #######" ; 
+echo -e "\e[0m"
+
+
+read  -n 1; 
+exit; 
+exec bash;
