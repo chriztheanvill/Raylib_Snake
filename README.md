@@ -14,9 +14,6 @@ Arrows
 ## Quit
 Esc or click in the Window X
 
-# VS Code
-Edited in VS Code, once open, 
-
 ![image](https://github.com/chriztheanvill/Raylib_Snake/assets/37992958/98aacacf-e629-4569-9bca-074387f1afca)
 
 ![image](https://github.com/chriztheanvill/Raylib_Snake/assets/37992958/1c37f14b-1f7f-4459-848b-56e6745bf6a0)
